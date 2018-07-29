@@ -5,19 +5,15 @@ class GoogleSpider(scrapy.Spider):
     name = 'googlespider'
     output = False;
     def __init__(self, searchTerms='', log=False, **kwargs):
-        print(searchTerms)
         output = log
         searchTerms.replace(" ", "+");
         re.sub(' ', "+", searchTerms)
-        print(searchTerms)
         self.start_urls = [("http://www.google.com/search?q=" + searchTerms + "&tbm=shop")] #Open google.com/search?<SEARCH+TERMS>&tbm=shop, the shopping tab for that search.
-        print(self.start_urls)
-        print(searchTerms)
-        print("Http://www.google.com/search?" + searchTerms + "&tbm=shop")
-        print("\n\n\n\n\n")
-        
+        if self.output:
+            print(self.start_urls)
     def parse(self, response):
-        print("\n" + response.url + "\n")
+        if self.output:
+            print("\n" + response.url + "\n")
         #print(response.body)
         resList = response.css("#ires > ol > div > div > div").extract()#.extract_first())
         if self.output:
