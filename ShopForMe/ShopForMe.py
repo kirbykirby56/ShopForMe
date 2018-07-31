@@ -6,7 +6,6 @@ class GoogleSpider(scrapy.Spider):
     output = True;
     def __init__(self, searchTerms='', log=True, **kwargs):
         output = log
-        searchTerms.replace(" ", "+")#It's probably true that one of these does all of the work, but I have both so that it's guaranteed to work anyway.
         re.sub(' ', "+", searchTerms)
         self.start_urls = [("http://www.google.com/search?q=" + searchTerms + "&tbm=shop")] #Open google.com/search?<SEARCH+TERMS>&tbm=shop, the shopping tab for that search.
         print("Start Urls: " + self.start_urls[0]) if self.output else None
