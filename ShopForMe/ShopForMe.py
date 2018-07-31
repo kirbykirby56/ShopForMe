@@ -4,8 +4,6 @@ import re
 class GoogleSpider(scrapy.Spider):
     name = 'googlespider'
     output = True;
-
-
     def __init__(self, searchTerms='', log=True, **kwargs):
         output = log
         searchTerms.replace(" ", "+")#It's probably true that one of these does all of the work, but I have both so that it's guaranteed to work anyway.
@@ -14,7 +12,7 @@ class GoogleSpider(scrapy.Spider):
         if self.output:
             print("Start Urls: ")
             print(self.start_urls)
-
+            
     def parse(self, response):
         if self.output:
             print(response.url)
@@ -24,10 +22,7 @@ class GoogleSpider(scrapy.Spider):
             link = "https://www.google.com" + item.css("div > a::attr(href)").extract_first()
             re.sub("&amp", "&", link)
             if self.output:
-                print("    NAME: " + name)
-                print("    LINK: " + link)
-                print("    PRICE: " + price),
-                print("\n")
+                print("    NAME: " + name + "\n    LINK: " + link + "    PRICE: " + price + "\n")
             yield {
                 'Name': name,
                 'Price': price,
